@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lunch',
+    'lunchapp',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -49,9 +49,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'Lunchbox.urls'
+ROOT_URLCONF = 'lunch.urls'
 
-WSGI_APPLICATION = 'Lunchbox.wsgi.application'
+WSGI_APPLICATION = 'lunch.wsgi.application'
 
 
 # Database
@@ -84,7 +84,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'lunch/templates'),
+    os.path.join(BASE_DIR, 'lunchapp/templates'),
 )
 
-MEDIA_ROOT = 'lunch/static/img/uploaded'
+MEDIA_ROOT = 'lunchapp/static/img/uploaded'

@@ -7,14 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('lunch', '0002_order_comment'),
+        ('lunchapp', '0004_auto_20141129_1654'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='menu',
-            name='canteen',
-            field=models.ForeignKey(default='', to='lunch.Canteen'),
+            model_name='kid',
+            name='image',
+            field=models.FileField(default='', upload_to=b''),
             preserve_default=False,
         ),
     ]

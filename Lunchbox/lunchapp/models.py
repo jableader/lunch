@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
-from django.contrib import admin
-from Lunchbox.settings import STATIC_URL
+
+from lunch.settings import STATIC_URL
 
 
 def imgurl(url): return STATIC_URL + 'img/uploaded' + url[1:]

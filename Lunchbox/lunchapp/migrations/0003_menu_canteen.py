@@ -7,14 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('lunch', '0001_initial'),
+        ('lunchapp', '0002_order_comment'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='comment',
-            field=models.CharField(default='', max_length=140),
+            model_name='menu',
+            name='canteen',
+            field=models.ForeignKey(default='', to='lunchapp.Canteen'),
             preserve_default=False,
         ),
     ]

@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('price', models.DecimalField(max_digits=5, decimal_places=2)),
                 ('name', models.CharField(max_length=32)),
                 ('description', models.CharField(max_length=140)),
-                ('canteen', models.ForeignKey(to='lunch.Canteen')),
+                ('canteen', models.ForeignKey(to='lunchapp.Canteen')),
             ],
             options={
             },
@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
             name='LunchLady',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('canteen', models.ForeignKey(to='lunch.Canteen')),
+                ('canteen', models.ForeignKey(to='lunchapp.Canteen')),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -83,8 +83,8 @@ class Migration(migrations.Migration):
             name='Order',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('items', models.ManyToManyField(to='lunch.Item')),
-                ('kid', models.ForeignKey(to='lunch.Kid')),
+                ('items', models.ManyToManyField(to='lunchapp.Item')),
+                ('kid', models.ForeignKey(to='lunchapp.Kid')),
             ],
             options={
             },
@@ -94,7 +94,7 @@ class Migration(migrations.Migration):
             name='Parent',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('canteen', models.ForeignKey(to='lunch.Canteen')),
+                ('canteen', models.ForeignKey(to='lunchapp.Canteen')),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -104,19 +104,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='kid',
             name='parent',
-            field=models.ForeignKey(to='lunch.Parent'),
+            field=models.ForeignKey(to='lunchapp.Parent'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='group',
             name='items',
-            field=models.ManyToManyField(to='lunch.Item'),
+            field=models.ManyToManyField(to='lunchapp.Item'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='group',
             name='menu',
-            field=models.ForeignKey(to='lunch.Menu'),
+            field=models.ForeignKey(to='lunchapp.Menu'),
             preserve_default=True,
         ),
     ]
