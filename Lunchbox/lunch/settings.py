@@ -57,10 +57,15 @@ WSGI_APPLICATION = 'lunch.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+if os.name == 'nt':
+    sqlLocation = os.path.join(BASE_DIR, 'db.sqlite3')
+else:
+    sqlLocation = '/home/jableader/lunch/Lunchbox/db.sqlite'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': sqlLocation,
     }
 }
 

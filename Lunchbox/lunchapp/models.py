@@ -99,6 +99,7 @@ class Group(models.Model):
     menu = models.ForeignKey(Menu)
     items = models.ManyToManyField(Item)
 
+
     def dict(self):
         return {
             'name': self.name,

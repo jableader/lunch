@@ -8,7 +8,10 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lunch.settings")
 
+if os.name != 'nt':
+    path = '/home/jableader/lunch/Lunchbox'
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lunch.settings")
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
