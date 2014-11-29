@@ -1,1 +1,1 @@
-web: python Lunchbox/manage.py "0.0.0.0:$PORT"
+web: python Lunchbox/manage.py runserver "0.0.0.0:$PORT"
