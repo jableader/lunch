@@ -1,1 +1,1 @@
-web: python Lunchbox/manage.py run_gunicorn -b "0.0.0.0:$PORT" -w 3shabda
+web: python Lunchbox/manage.py "0.0.0.0:$PORT"
