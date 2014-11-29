@@ -11,7 +11,8 @@ class ItemInline(admin.StackedInline):
 class GroupInline(admin.StackedInline):
     model = Group
 
-
-class Menu(admin.ModelAdmin):
+class MenuAdmin(admin.ModelAdmin):
     fields = ['name']
-    inlines = GroupInline
+
+class GroupAdmin(admin.ModelAdmin):
+    fields = ['name', 'menu', 'items']
