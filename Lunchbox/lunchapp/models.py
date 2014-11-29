@@ -77,7 +77,7 @@ class Menu(models.Model):
     def dict(self):
         return {
             'name': self.name,
-            'groupIds': [g.dict() for g in self.group_set.all()],
+            'groupIds': [g.dict() for g in sorted(self.group_set.all(), lambda x, y: y.priority - x.priority)],
             'specialIds': [s.dict() for s in self.special_set.all()],
             'pk': self.pk,
         }
@@ -98,7 +98,7 @@ class Group(models.Model):
     name = models.CharField(max_length=32)
     menu = models.ForeignKey(Menu)
     items = models.ManyToManyField(Item)
-
+    priority = models.IntegerField(default=0)
 
     def dict(self):
         return {

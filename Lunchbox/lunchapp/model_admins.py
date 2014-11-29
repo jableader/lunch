@@ -23,4 +23,4 @@ class MenuAdmin(admin.ModelAdmin):
     fields = ['name', 'canteen']
 
 class GroupAdmin(admin.ModelAdmin):
-    fields = ['name', 'menu', 'items']
+    fields = ['name', 'menu', 'items', 'priority']

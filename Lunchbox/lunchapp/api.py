@@ -19,4 +19,7 @@ def auth(request):
     else: return HttpResponse(json.dumps({'pk': user.pk}), 'text/json')
 
 def makeOrder(request):
-    return #make some order
+    order = json.loads(request.POST['order'])
+    order = Order.objects.new(kid__pk = order['kidId'], comment = order['comment'])
+    order.items = [Item.objects.get(pk=pk) for pk in order['itemIds']]
+    order.save()
