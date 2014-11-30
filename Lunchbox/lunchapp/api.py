@@ -19,19 +19,22 @@ def auth(request):
     if user is None: return HttpResponse('{pk:-1}', 'text/json')
     else: return HttpResponse(json.dumps({'pk': user.pk}), 'text/json')
 
+@csrf_exempt
+def getToken(request, client_id):
+    token = braintree.ClientToken.generate({
+        'customer_id':client_id
+    })
+
+    return HttpResponse(token)
+
+
 def makepayment(card, cost):
     braintree.Configuration.configure(
         braintree.Environment.Sandbox,
-        "merchid",
-        "pub_key",
-        "prv,_key"
+        'rnk5xkqh7zsfmq8r',
+        '37fxzhxy939jn9rz',
+        'e54c4c1d837027f2b0dc6f50fccc8fcc'
     )
-
-    if card == {}:
-        class Fake:
-            def __init__(self): self.is_success = True
-        return Fake()
-
 
     return braintree.Transaction.sale({
         "amount": "%.2f" % cost,
