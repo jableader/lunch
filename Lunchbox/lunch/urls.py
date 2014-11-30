@@ -8,7 +8,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', lunchapp.views.home),
-    url(r'^base/', lunchapp.views.index),
     url(r'^api/login', lunchapp.api.auth),
     url(r'^api/canteen/(?P<user_pk>\d+)', lunchapp.api.canteen),
     url(r'^api/kids/(?P<user_pk>\d+)', lunchapp.api.kids),
