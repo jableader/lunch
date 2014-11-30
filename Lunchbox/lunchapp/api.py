@@ -19,16 +19,8 @@ def auth(request):
     if user is None: return HttpResponse('{pk:-1}', 'text/json')
     else: return HttpResponse(json.dumps({'pk': user.pk}), 'text/json')
 
-@csrf_exempt
-def getToken(request, client_id):
-    token = braintree.ClientToken.generate({
-        'customer_id':client_id
-    })
 
-    return HttpResponse(token)
-
-
-def makepayment(card, cost):
+def set_env():
     braintree.Configuration.configure(
         braintree.Environment.Sandbox,
         'rnk5xkqh7zsfmq8r',
@@ -36,9 +28,20 @@ def makepayment(card, cost):
         'e54c4c1d837027f2b0dc6f50fccc8fcc'
     )
 
+@csrf_exempt
+def getToken(request, client_id):
+    set_env()
+    token = braintree.ClientToken.generate({
+        'customer_id':client_id
+    })
+
+    return HttpResponse(json.dumps({'client_token': token}), 'text/json')
+
+
+def makepayment(nonce, cost):
     return braintree.Transaction.sale({
         "amount": "%.2f" % cost,
-        "credit_card": card
+        "payment_method_nonce": nonce
     })
 
 
@@ -54,10 +57,16 @@ def makeOrder(request):
     map(order.items.add, items)
 
     cost = sum([i.price for i in order.items.all()])
-    card = json.loads(request.POST['card'])
 
-    if makepayment(card, cost).is_success:
-        return HttpResponse('{success: true}')
+    if 'nonce' not in request.POST:
+        order.save()
+        return HttpResponse('{"success": true}')
+
+    nonce = json.loads(request.POST['nonce'])
+
+    if makepayment(nonce, cost).is_success:
+        order.save()
+        return HttpResponse('{"success": true}')
     else:
         order.delete()
-        return HttpResponse('{success: false}')
+        return HttpResponse('{"success": false}')
